@@ -1,10 +1,15 @@
+import os
 import openai
 import gradio as gr
 import markdown
 import config
 
 # API_KEY
-openai.api_key = config.API_KEY
+if config.API_KEY == "YOUR_OPENAI_API_KEY":
+    openai.api_key = os.getenv('API_KEY')
+else:
+    openai.api_key = config.API_KEY
+assert openai.api_key is not None, "Failed to read API_KEY"
 
 
 messages = [
